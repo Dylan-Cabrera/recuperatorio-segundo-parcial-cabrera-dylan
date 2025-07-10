@@ -10,7 +10,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "API REST para gestión de libros con Node.js, Express y Sequelize",
+  "description": "API REST para tipos de Programming Language con Node.js, Express y Sequelize",
   "dependencies": {
     "dotenv": "^16.6.0",
     "express": "^5.1.0",
