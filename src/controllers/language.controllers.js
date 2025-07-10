@@ -71,9 +71,18 @@ export const updateLanguage = async (req,res) => {
 };
 
 export const deleteLanguage = async (req,res) => {
+    const id = req.params.id;
+    const verifyId = await ProgrammingLanguage.findByPk(id); //busca si existe el regustro con ese id
+
+    if(isNaN(id) || Math.round(id) != id) { return res.status(400).json({ message: "El id debe ser un numero entero"})};
+    if(!verifyId){ return res.status(404).json({ message: "Id no encontrado"}) };
+
     try {
+        const deleteLanguage = await ProgrammingLanguage.destroy({ where: {id:id}});
+        return res.status(200).json({ message: "Lenguaje eliminado con exito"})
         
     } catch (e) {
-        
+        res.status(500).json({message: `Error al eliminar el lenguaje
+            error: ${e}`})
     }
 };
