@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { getAll, getById, createLanguage } from "../controllers/language.controllers.js";
+import { getAll, getById, createLanguage, updateLanguage } from "../controllers/language.controllers.js";
 
 const router = Router();
 
 router.get("/languages", getAll);
 router.get("/languages/:id", getById);
 router.post("/languages", createLanguage);
+router.put("/languages/:id", updateLanguage)
 
 export default router;
 
