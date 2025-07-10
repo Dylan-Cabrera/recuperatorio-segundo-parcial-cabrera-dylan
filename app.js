@@ -2,6 +2,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import { starDB } from "./src/config/db.js";
+import languageRoutes from "./src/routes/language.routes.js";
 
 
 //configuraciones
@@ -12,6 +13,7 @@ const PORT = process.env.PORT;
 
 //middleware
 app.use(express.json());
+app.use("/api", languageRoutes);
 
 //servidor
 app.listen(PORT, () => {
