@@ -27,10 +27,20 @@ export const getById = async (req,res) => {
 };
 
 export const createLanguage = async (req,res) => {
+    const { name, paradigm, release_year} = req.body;
+    const uniqueName = await ProgrammingLanguage.findOne({where: {name: name}}); //busca si el nombre ya existe
+    
+    if(uniqueName) { return res.status(400).json({ message: "Ya existe un lenguaje con ese nombre"})};
+    if(name.trim() === "") { return res.status(400).json({ message: "El nombre no puede estar vacio"})};
+    if(paradigm.trim() === "") { return res.status(400).json({ message: "El paradigma no puede estar vacio"})};
+    if(release_year === null) { return res.status(400).json({ message: "El año de lanzamiento no puede estar vacio"})};
+
     try {
-        
+        const createLanguage = await ProgrammingLanguage.create({ name, paradigm, release_year});
+        res.status(201).json(createLanguage);
     } catch (e) {
-        
+        res.status(500).json({message: `Error al crear el lenguaje
+            error: ${e}`})
     }
 };
 
